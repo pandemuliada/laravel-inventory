@@ -26,7 +26,7 @@
                 <td>{{ $category->created_at->format('m/d/Y') }}</td>
                 <td>{{ $category->updated_at->format('m/d/Y') }}</td>
                 <td>
-                  <button class="btn btn-sm btn-warning mr-2">Edit</button>
+                  <a role="button" class="btn btn-sm btn-warning mr-2" href="{{ route('categories.edit', $category->id) }}">Edit</a>
                   <button class="btn btn-sm btn-outline-danger">Delete</button>
                 </td>
               </tr>
