@@ -14,10 +14,14 @@
 
             <div class="form-group">
               <label for="name">Email address</label>
-              <input type="text" class="form-control" id="name" value="{{ $category->name }}" name="name" />
+              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $category->name }}" name="name" />
+              @error('name')
+              <small class="form-text text-muted">{{ $message }}</small>
+              @enderror
             </div>
 
             <button class="btn btn-primary">Save</button>
+            <a role="button" href="{{ route('categories.index') }}" class="btn btn-outline-secondary">Cancel</a>
           </form>
         </div>
       </div>
