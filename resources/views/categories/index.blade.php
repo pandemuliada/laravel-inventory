@@ -6,10 +6,21 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-          <div class="row align-items-center my-4 px-3">
+          <div class="d-flex align-items-center my-4">
             <h2 class="title-2 m-0">Category</h2>
             <a href="{{ route('categories.create') }}" class="btn btn-primary m-0 ml-auto">+ New Category</a>
           </div>
+          <form action="{{ route('categories.index') }}" method="GET" class="d-flex">
+            <div class="form-group flex-fill">
+              <input type="text" autofocus class="form-control @error('name') is-invalid @enderror w-100" name="name" value="{{ $name }}" placeholder="Find category..." />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-outline-primary ml-2">Search</button>
+            </div>
+            <div class="form-group">
+              <a href="{{ route('categories.index') }}" role="button" class="btn btn-outline-secondary ml-2">Clear</a>
+            </div>
+          </form>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -28,7 +39,7 @@
                 <td>{{ $category->created_at->format('m/d/Y') }}</td>
                 <td>{{ $category->updated_at->format('m/d/Y') }}</td>
                 <td>
-                  <a role="button" class="btn btn-sm btn-warning mr-2" href="{{ route('categories.edit', $category->id) }}">Edit</a>
+                  <a role="button" class="btn btn-sm btn-warning mr-1" href="{{ route('categories.edit', $category->id) }}">Edit</a>
                   <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="{{ '#category-' . $category->id }}">Delete</button>
                 </td>
               </tr>
@@ -65,7 +76,7 @@
             </tbody>
           </table>
 
-          {{ $categories->links() }}
+          {{ $categories->withQueryString()->links() }}
         </div>
       </div>
     </div>

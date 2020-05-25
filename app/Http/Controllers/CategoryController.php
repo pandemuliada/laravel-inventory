@@ -14,9 +14,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate();
+        $name = request('name', '');
 
-        return view('categories.index', compact('categories'));
+        $categories = Category::query()->when($name, function ($query) use ($name) {
+            $query->where('name', 'like', '%' . $name . '%');
+        })->paginate(10);
+
+        return view('categories.index', compact('categories', 'name'));
     }
 
     /**
@@ -37,7 +41,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|unique:categories|max:255'
         ]);
 
@@ -81,7 +85,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|unique:categories|max:255'
         ]);
 

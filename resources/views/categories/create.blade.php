@@ -19,7 +19,7 @@
               @enderror
             </div>
 
-            <div class="row align-items-center justify-content-end px-3">
+            <div class="d-flex align-items-center justify-content-end">
               <a role="button" href="{{ route('categories.index') }}" class="btn btn-outline-secondary mr-2">Cancel</a>
               <button class="btn btn-primary">Save</button>
             </div>
