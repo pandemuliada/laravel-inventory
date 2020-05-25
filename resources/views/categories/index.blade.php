@@ -6,7 +6,10 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-          <h2 class="title-2 mb-4">Category</h2>
+          <div class="row align-items-center my-4 px-3">
+            <h2 class="title-2 m-0">Category</h2>
+            <a href="{{ route('categories.create') }}" class="btn btn-primary m-0 ml-auto">+ New Category</a>
+          </div>
           <table class="table table-striped">
             <thead>
               <tr>
