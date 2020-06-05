@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::orderBy('created_at', 'DESC')->paginate(10);
+        $roles = Role::orderBy('created_at', 'asc')->paginate(10);
         return view('roles.index', compact('roles'));
     }
 
@@ -26,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -37,7 +37,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:categories|max:255'
+        ]);
+
+        $role = new Role();
+        $role->name = $request->name;
+        $role->save();
+
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -48,7 +56,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::findById($id);
+        return view('roles.show', compact('role'));
     }
 
     /**
