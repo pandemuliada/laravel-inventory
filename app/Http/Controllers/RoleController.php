@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin', 'permission:create roles|read roles|edit roles|delete roles']);
+    }
+
     /**
      * Display a listing of the resource.
      *
