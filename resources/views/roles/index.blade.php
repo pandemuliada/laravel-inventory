@@ -8,7 +8,9 @@
         <div class="card-body">
           <div class="d-flex align-items-center my-4">
             <h2 class="title-2 m-0">Role</h2>
+            @can('create roles')
             <a href="{{ route('roles.create') }}" class="btn btn-primary m-0 ml-auto">+ New Role</a>
+            @endcan
           </div>
           <table class="table table-striped">
             <thead>
