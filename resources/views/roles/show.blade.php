@@ -10,6 +10,18 @@
           <div>
             <p>Role name : {{ $role->name }}</p>
           </div>
+
+          <hr class="my-4"/>
+          
+          <h3 class="h4 mb-4">Associated Permissions</h3>
+          <ul class="list-group">
+            @foreach ($associated_permissions as $item)
+            <li class="list-group-item">
+              {{ $item }}
+            </li>
+            @endforeach
+          </ul>
+
         </div>
       </div>
     </div>

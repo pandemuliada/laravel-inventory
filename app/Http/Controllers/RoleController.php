@@ -61,7 +61,8 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::findById($id);
-        return view('roles.show', compact('role'));
+        $associated_permissions = $role->permissions()->pluck('name');
+        return view('roles.show', compact('role', 'associated_permissions'));
     }
 
     /**
@@ -72,7 +73,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findById($id);
+        return view('roles.edit', compact('role'));
     }
 
     /**
