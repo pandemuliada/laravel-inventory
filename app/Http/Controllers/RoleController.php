@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:super-admin', 'permission:create roles|read roles|edit roles|delete roles']);
+        $this->middleware(['auth', 'role:super-admin', 'permission:create roles|read roles|edit roles|delete roles']);
     }
 
     /**
@@ -61,8 +62,10 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::findById($id);
-        $associated_permissions = $role->permissions()->pluck('name');
-        return view('roles.show', compact('role', 'associated_permissions'));
+        $permissions = Permission::all();
+        $active_permissions = $role->permissions()->pluck('id')->toArray();
+
+        return view('roles.show', compact('role', 'active_permissions', 'permissions'));
     }
 
     /**
@@ -74,7 +77,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findById($id);
-        return view('roles.edit', compact('role'));
+        $permissions = Permission::all();
+        $active_permissions = $role->permissions()->pluck('id')->toArray();
+
+        return view('roles.edit', compact('role', 'permissions', 'active_permissions'));
     }
 
     /**
@@ -86,17 +92,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $this->validate($request, [
+            'role' => 'required'
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $role = Role::findById($id);
+        $role->name = $request->role;
+        $role->update();
+
+        $role->syncPermissions($request->only('permissions'));
+
+        return redirect()->route('roles.show', $id);
     }
 }
