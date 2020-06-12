@@ -1,10 +1,11 @@
 <?php
 
+use App\Item;
 use App\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class CategorySeeder extends Seeder
+class ItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +15,9 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        Category::truncate();
+        Item::truncate();
         Schema::enableForeignKeyConstraints();
         
-        factory(Category::class, 10)->create();
+        factory(Item::class, 5)->create();
     }
 }

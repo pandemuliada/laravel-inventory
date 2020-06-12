@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Category extends Model
+class Item extends Model
 {
     use SoftDeletes, LogsActivity;
     
-    protected static $logName = 'category';
-    protected static $logAttributes  = ['name'];
+    protected static $logName = 'item';
+    protected static $logAttributes  = ['name', 'description', 'category_id'];
 
-    public function items()
+    public function category()
     {
-        // Get items related to category
-        return $this->hasMany('App\Item', 'category_id', 'id');
+        return $this->belongsTo('App\Category', 'category_id', 'id');
     }
-
+    
     public function getDescriptionForEvent(string $eventName): string
     {
         return "This model has been {$eventName}";
     }
+    
 }
