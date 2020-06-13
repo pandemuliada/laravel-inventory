@@ -19,6 +19,6 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'super-admin']);
         Role::create(['name' => 'admin'])->syncPermissions(['create categories', 'read categories', 'edit categories', 'delete categories']);
-        Role::create(['name' => 'user'])->syncPermissions(['read categories', 'edit categories']);
+        Role::create(['name' => 'user'])->syncPermissions(['read categories', 'read items']);
     }
 }
