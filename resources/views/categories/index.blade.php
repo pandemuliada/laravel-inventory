@@ -8,7 +8,9 @@
         <div class="card-body">
           <div class="d-flex align-items-center my-4">
             <h2 class="title-2 m-0">Category</h2>
+            @can('create categories')
             <a href="{{ route('categories.create') }}" class="btn btn-primary m-0 ml-auto">+ New Category</a>
+            @endcan
           </div>
           <form action="{{ route('categories.index') }}" method="GET" class="d-flex">
             <div class="form-group flex-fill">
@@ -28,7 +30,9 @@
                 <th scope="col">Name</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Updated at</th>
+                @canany(['delete categories', 'edit categories'])
                 <th scope="col">Action</th>
+                @endcanany
               </tr>
             </thead>
             <tbody>
@@ -39,8 +43,12 @@
                 <td>{{ $category->created_at->format('m/d/Y') }}</td>
                 <td>{{ $category->updated_at->format('m/d/Y') }}</td>
                 <td>
+                  @can('edit categories')
                   <a role="button" class="btn btn-sm btn-warning mr-1" href="{{ route('categories.edit', $category->id) }}">Edit</a>
+                  @endcan
+                  @can('delete categories')
                   <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="{{ '#category-' . $category->id }}">Delete</button>
+                  @endcan
                 </td>
               </tr>
 
