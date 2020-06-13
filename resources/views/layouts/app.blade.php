@@ -52,6 +52,9 @@
                         @endif
                         @else
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('items.index') }}">Item</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
                         </li>
                         @role('super-admin')
