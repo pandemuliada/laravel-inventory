@@ -6,14 +6,15 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-          <h2 class="title-2 mb-4">New Item</h2>
+          <h2 class="title-2 mb-4">Update Item</h2>
 
-          <form action="{{ route('items.store') }}" method="POST">
+          <form action="{{ route('items.update', $item->id) }}" method="POST">
+            @method('PUT')
             @csrf
 
             <div class="form-group">
               <label for="name">Name</label>
-            <input type="text" autofocus class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name" value="{{ old('name') }}" />
+            <input type="text" autofocus class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name" value="{{ $item->name }}" />
               @error('name')
               <small class="form-text text-muted">{{ $message }}</small>
               @enderror
@@ -21,7 +22,7 @@
             
             <div class="form-group">
               <label for="description">Description</label>
-              <input type="text" autofocus class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Enter description" value="{{ old('description') }}" />
+              <input type="text" autofocus class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Enter description" value="{{ $item->description }}" />
               @error('description')
               <small class="form-text text-muted">{{ $message }}</small>
               @enderror
@@ -32,7 +33,7 @@
               <select class="form-control @error('category') is-invalid @enderror" name="category" id="category">
                 <option value="">Choose category<option
                 @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ $category->id == old('category') ? "selected" : "" }}>{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ $category->id == $item->category->id ? "selected" : "" }}>{{ $category->name }}</option>
                 @endforeach
               </select>
               @error('category')

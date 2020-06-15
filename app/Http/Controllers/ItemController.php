@@ -53,8 +53,8 @@ class ItemController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3|unique:items',
-            'category' => 'required',
             'description' => 'required',
+            'category' => 'required',
         ]);
 
         Item::create([
@@ -85,7 +85,8 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        $categories = Category::all();
+        return view('items.edit', compact('categories', 'item'));
     }
 
     /**
@@ -97,7 +98,19 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|unique:items',
+            'description' => 'required',
+            'category' => 'required',
+        ]);
+
+        $item->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->category,
+        ]);
+
+        return redirect()->route('items.index');
     }
 
     /**
