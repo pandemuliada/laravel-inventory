@@ -9,6 +9,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Item extends Model
 {
     use SoftDeletes, LogsActivity;
+ 
+    protected $guarded = [];
     
     protected static $logName = 'item';
     protected static $logAttributes  = ['name', 'description', 'category_id'];
