@@ -23,3 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoryController')->except(['show']);
 Route::resource('items', 'ItemController')->except(['show']);
 Route::resource('roles', 'RoleController')->except(['destroy']);
+
+Route::prefix('account')->group(function () {
+    Route::get('/', 'AccountController@show')->name('account');
+    Route::get('/edit', 'AccountController@edit')->name('account.edit');
+});
