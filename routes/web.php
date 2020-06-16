@@ -27,4 +27,5 @@ Route::resource('roles', 'RoleController')->except(['destroy']);
 Route::prefix('account')->group(function () {
     Route::get('/', 'AccountController@show')->name('account');
     Route::get('/edit', 'AccountController@edit')->name('account.edit');
+    Route::put('/update', 'AccountController@update')->name('account.update');
 });

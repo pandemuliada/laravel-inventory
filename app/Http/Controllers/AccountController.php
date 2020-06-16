@@ -71,7 +71,20 @@ class AccountController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user = User::find(Auth::user()->id);
+
+        $this->validate($request, [
+            'name' => 'required|unique:users,name,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
+        ]);
+
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('account');
     }
 
     /**
