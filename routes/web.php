@@ -24,8 +24,9 @@ Route::resource('categories', 'CategoryController')->except(['show']);
 Route::resource('items', 'ItemController')->except(['show']);
 Route::resource('roles', 'RoleController')->except(['destroy']);
 
-Route::prefix('account')->group(function () {
+Route::prefix('account')->middleware(['auth'])->group(function () {
     Route::get('/', 'AccountController@show')->name('account');
     Route::get('/edit', 'AccountController@edit')->name('account.edit');
     Route::put('/update', 'AccountController@update')->name('account.update');
+    Route::post('/change_avatar', 'AccountController@change_avatar')->name('account.change_avatar');
 });

@@ -33,9 +33,13 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function change_avatar(Request $request)
     {
-        //
+        $user = Auth::user();
+        $user->clearMediaCollection('avatar');
+        $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+
+        return redirect()->route('account');
     }
 
     /**
@@ -60,6 +64,8 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         return view('account.edit', compact('user'));
+
+        $user->addMedia('')->toMediaCollection('avatar');
     }
 
     /**
@@ -85,16 +91,5 @@ class AccountController extends Controller
         ]);
 
         return redirect()->route('account');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }
