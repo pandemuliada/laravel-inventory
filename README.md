@@ -28,7 +28,7 @@ Enable `extension=exif` on your `php.ini` file.
 -   [x] Model Relationship
 -   [x] Permissions & Roles using [spatie/laravel-permission](https://docs.spatie.be/laravel-permission/v3/introduction/)
 -   [x] Media & File Upload using [spatie/laravel-medialibrary](https://docs.spatie.be/laravel-medialibrary/v8/introduction/)
--   [x] Activity Log [spatie/laravel-medialibrary](https://docs.spatie.be/laravel-activitylog/v3/introduction/)
+-   [x] Activity Log [spatie/laravel-activitylog](https://docs.spatie.be/laravel-activitylog/v3/introduction/)
 
 ## Users
 
