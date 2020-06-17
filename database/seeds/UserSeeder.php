@@ -36,12 +36,5 @@ class UserSeeder extends Seeder
             'password' => Hash::make('user@gmail.com')
         ]);
         $user->syncRoles(['user']);
-
-        $user = User::create([
-            'name' => 'Pande Muliada',
-            'email' => 'pandemuliada@gmail.com',
-            'password' => Hash::make('pandemuliada@gmail.com')
-        ]);
-        $user->syncRoles(['user']);
     }
 }
