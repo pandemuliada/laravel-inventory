@@ -48,5 +48,5 @@ class User extends Authenticatable implements HasMedia
         $this->addMediaCollection('avatar')
             ->singleFile()
             ->useFallbackUrl('/images/default-avatar.png');
-        }
+    }
 }

@@ -8,31 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function change_avatar(Request $request)
     {
         $user = Auth::user();
@@ -42,24 +17,12 @@ class AccountController extends Controller
         return redirect()->route('account');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
         $user = Auth::user();
         return view('account.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         $user = Auth::user();
@@ -68,13 +31,6 @@ class AccountController extends Controller
         $user->addMedia('')->toMediaCollection('avatar');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $user = User::find(Auth::user()->id);
