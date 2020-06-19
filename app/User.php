@@ -10,11 +10,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements HasMedia
 {
-    use Notifiable, hasRoles, InteractsWithMedia;
+    use Notifiable, hasRoles, InteractsWithMedia, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

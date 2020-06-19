@@ -57,9 +57,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
                         </li>
-                        @role('super-admin')
+                        @can('read users')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('roles.index') }}">Role</a>
+                        </li>
+                        @endcan
+                        @role('super-admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">User</a>
                         </li>
                         @endrole
                         <li class="nav-item dropdown">

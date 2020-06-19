@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoryController')->except(['show']);
 Route::resource('items', 'ItemController')->except(['show']);
 Route::resource('roles', 'RoleController')->except(['destroy']);
+Route::resource('users', 'UserController');
 
 Route::prefix('account')->middleware(['auth'])->group(function () {
     Route::get('/', 'AccountController@show')->name('account');
