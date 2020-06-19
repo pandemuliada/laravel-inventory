@@ -44,6 +44,7 @@
                 <td>{{ $item->category->name ?? 'Undefined' }}</td>
                 <td>{{ $item->created_at->format('m/d/Y') }}</td>
                 <td>{{ $item->updated_at->format('m/d/Y') }}</td>
+                @canany(['delete items', 'edit items'])
                 <td class="d-flex">
                   @can('edit items')
                   <a role="button" class="btn btn-sm btn-warning mr-1" href="{{ route('items.edit', $item->id) }}">Edit</a>
@@ -52,6 +53,7 @@
                   <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="{{ '#item-' . $item->id }}">Delete</button>
                   @endcan
                 </td>
+                @endcanany
               </tr>
 
               <!-- Delete Modal -->
